@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: my-ds
+  labels:
+    app: my-app
+spec: 
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+      - name: my-app
+        image: mysql
+        ports:
+          - name: http
+            protocol: TCP
+            containerPort: 80
+        env:
+        - name: "MYSQL_ROOT_PASSWORD"
+          value: "redhat"
+  selector:
+    matchLabels:
+      app: my-app
